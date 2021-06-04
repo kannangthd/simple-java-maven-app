@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'orangesquadjenkinsslave-db2orders-did'
+            label 'master'
         }
     }
     stages {
