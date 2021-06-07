@@ -5,7 +5,7 @@ pipeline {
         }
     }
     stages {
-        stage('Versioning the app to Stage') {
+        stage('Versioning the app to Dev') {
             when {
                 branch 'master'
             }
