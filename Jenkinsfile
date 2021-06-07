@@ -5,6 +5,19 @@ pipeline {
         }
     }
     stages {
+        stage('Versioning the app to Stage') {
+            when {
+                branch 'dev-master'
+            }
+            steps {
+                script {
+                  def pom = readMavenPom file: 'pom.xml'
+                  printf("Version: %s", pom.version)
+                  version = getVersion(pom)
+                  printf("Version again: %s", version)
+                }
+            }
+        }
         stage('Build') { 
             steps {
                 script {
