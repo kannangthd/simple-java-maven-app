@@ -5,6 +5,36 @@ pipeline {
         }
     }
     stages {
+        stage('Code Checkout') {
+            steps {
+                script {
+                    sh '''
+                        git remote -v
+                        git remote rm origin
+                        git remote add origin "https://github.com/kannangthd/simple-java-maven-app.git"
+                    '''
+                }
+            }
+        }
+        stage('Determination of Build Type') {
+          steps {
+            script {
+                if (env.GIT_BRANCH == "master") {
+                 echo "Build type is Master"
+                 env.deploy_env = "stage"
+               } else if (env.GIT_BRANCH == "dev-master"){
+                 echo "Build type is DEV"
+                 env.deploy_env = "dev"
+               } else if (env.GIT_BRANCH.contains("-dev")) {
+                 echo "Build type is Feature branch"
+                 env.deploy_env = "feature"
+               } else if (env.GIT_BRANCH.contains("bugfix")) {
+                 echo "Build type is Feature branch"
+                 env.deploy_env = "bugfix"
+              } 
+            }
+          }
+        }
         stage('Versioning the app to Dev') {
             steps {
                 script {
