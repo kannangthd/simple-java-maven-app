@@ -42,7 +42,8 @@ pipeline {
                   printf("Version: %s", pom.version)
                   def mvnHome = tool name: 'Maven', type: 'maven'  
                   sh "${mvnHome}/bin/mvn build-helper:parse-version versions:set \
-                    -DnewVersion='\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}'"
+                    -DnewVersion='\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}' \
+                    versions:commit"
                   sh '''
                      git add pom.xml
                      git commit -m "Uploading the newly updated version on github repo under master branch"
