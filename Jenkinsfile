@@ -10,8 +10,6 @@ pipeline {
                 script {
                   def pom = readMavenPom file: 'pom.xml'
                   printf("Version: %s", pom.version)
-                  version = getVersion(pom)
-                  printf("Version again: %s", version)
                 }
             }
         }
