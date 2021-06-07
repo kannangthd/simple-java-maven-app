@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Versioning the app to Stage') {
             when {
-                branch 'dev-master'
+                branch 'master'
             }
             steps {
                 script {
