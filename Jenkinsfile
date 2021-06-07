@@ -9,7 +9,9 @@ pipeline {
             steps {
                 script {
                   def pom = readMavenPom file: 'pom.xml'
-                  printf("Version: %s", pom)
+                  printf("Version: %s", pom.version)
+                  sh mvn build-helper:parse-version versions:set \
+                    -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}  
                 }
             }
         }
