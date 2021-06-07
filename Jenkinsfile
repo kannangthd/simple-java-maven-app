@@ -14,6 +14,7 @@ pipeline {
                   sh "${mvnHome}/bin/mvn build-helper:parse-version versions:set \
                     -DnewVersion='\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}'"
                   sh '''
+                     git add pom.xml
                      git commit -m "Uploading the newly updated version on github repo under master branch"
                      git push
                     '''
