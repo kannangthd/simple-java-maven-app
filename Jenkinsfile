@@ -10,6 +10,7 @@ pipeline {
                 script {
                   def pom = readMavenPom file: 'pom.xml'
                   printf("Version: %s", pom.version)
+                  def mvnHome = tool name: 'Maven', type: 'maven'  
                   sh "${mvnHome}/bin/mvn build-helper:parse-version versions:set \
                     -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}"
                 }
