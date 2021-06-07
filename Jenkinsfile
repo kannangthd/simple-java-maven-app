@@ -36,6 +36,9 @@ pipeline {
           }
         }
         stage('Versioning the app to Dev') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
                   def pom = readMavenPom file: 'pom.xml'
